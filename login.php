@@ -15,14 +15,14 @@
     </div>
 
     <div class="form">
-      <form class="register-form" action="index.html" method="get">
+      <form class="register-form" action="index.php" method="get">
         <input type="text" placeholder="name" />
         <input type="password" placeholder="password" />
         <input type="text" placeholder="email address" />
         <button type="submit">create</button>
         <p class="message">Already registered? <a href="#">Sign In</a></p>
       </form>
-      <form class="login-form" action="index.html" method="get">
+      <form class="login-form" action="index.php" method="get">
         <input type="text" placeholder="username" />
         <input type="password" placeholder="password" />
         <button type="submit">login</button>

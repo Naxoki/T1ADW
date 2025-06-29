@@ -13,7 +13,7 @@
   <div class="logo">TecStore</div>
   <nav>
     <ul>
-      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.php">Inicio</a></li>
       <li><a href="productos.html">Productos</a></li>
       <li><a href="#">Perfil</a></li>
     </ul>
@@ -22,8 +22,8 @@
     <form action="productos.html" method="get" >     
        <input type="text" placeholder="Que estás buscando?"/>
     </form>
-       <a href="login.html" class="user-icon" title="Iniciar sesión">👤 </a>
-    <a href="carrito.html" class="cart-icon" title="Ver carrito">
+       <a href="login.php" class="user-icon" title="Iniciar sesión">👤 </a>
+    <a href="carrito.php" class="cart-icon" title="Ver carrito">
       🛒
     </a>
   </div>
