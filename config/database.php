@@ -1,4 +1,7 @@
 <?php
+// config/database.php
+// Este archivo configura la conexión a la base de datos utilizando PDO.
+
 
 // Configuración de la base de datos
 $host = 'localhost';  // Cambia esto si tu servidor de base de datos está en otro lugar
