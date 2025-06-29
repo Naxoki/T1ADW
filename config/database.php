@@ -4,7 +4,7 @@
 $host = 'localhost';  // Cambia esto si tu servidor de base de datos está en otro lugar
 $dbname = 'tecstore_db';  // El nombre de la base de datos
 $username = 'root';  // Cambia esto por tu nombre de usuario de MySQL
-$password = '';  // Cambia esto por tu contraseña de MySQL
+$password = 'root';  // Cambia esto por tu contraseña de MySQL
 
 // Configurar la conexión
 try {
