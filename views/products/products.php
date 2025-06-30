@@ -31,6 +31,8 @@ $products = $productController->list(); // Obtener la lista de productos
         <tr>
             <th>Nombre</th>
             <th>Descripción</th>
+            <th>Marca</th>
+            <th>Categoria</th>
             <th>Precio</th>
             <th>Stock</th>
             <th>Imagen</th>
@@ -43,6 +45,8 @@ $products = $productController->list(); // Obtener la lista de productos
         ?>
             <tr>
                 <td><?php echo htmlspecialchars($product['name']); ?></td>
+                <td><?php echo htmlspecialchars($product['brand']); ?></td>
+                <td><?php echo htmlspecialchars($product['category']); ?></td>
                 <td><?php echo htmlspecialchars($product['description']); ?></td>
                 <td><?php echo number_format($product['price'], 2); ?> $</td>
                 <td><?php echo $product['stock']; ?></td>

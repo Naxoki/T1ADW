@@ -53,7 +53,40 @@ $productController = new ProductController();
     <!-- Formulario para editar el producto -->
     <form method="POST" action="edit.php?id=<?php echo $product['id']; ?>" >
         <label for="name">Nombre del Producto:</label>
-        <input type="text" name="name" value="<?php echo htmlspecialchars($product['name']); ?>" required><br><br>
+        <input type="text" name="name" value="<?php echo $product['name']; ?>" required><br><br>
+             
+        <label for="brand">Marca:</label>       
+        <select name="brand" required>
+            <option value="">Seleccione un tipo</option>
+            <option value="Samsung" <?php echo $product['brand'] == "Samsung" ? "selected" : ""; ?>>Samsung</option >
+            <option value="Asus" <?php echo $product['brand'] == "Asus" ? "selected" : ""; ?>>Asus</option>     
+            <option value="Apple" <?php echo $product['brand'] == "Apple" ? "selected" : ""; ?>>Apple</option>
+            <option value="Xiaomi" <?php echo $product['brand'] == "Xiaomi" ? "selected" : ""; ?>>Xiaomi</option>
+            <option value="Motorola" <?php echo $product['brand'] == "Motorola" ? "selected" : ""; ?>>Motorola</option>
+            <option value="Huawei" <?php echo $product['brand'] == "Huawei" ? "selected" : ""; ?>>Huawei</option>
+            <option value="LG" <?php echo $product['brand'] == "LG" ? "selected" : ""; ?>>LG</option>
+            <option value="Sony" <?php echo $product['brand'] == "Sony" ? "selected" : ""; ?>>Sony</option>
+            <option value="Lenovo" <?php echo $product['brand'] == "Lenovo" ? "selected" : ""; ?>>Lenovo</option>
+            <option value="Dell" <?php echo $product['brand'] == "Dell" ? "selected" : ""; ?>>Dell</option>
+            <option value="HP" <?php echo $product['brand'] == "HP" ? "selected" : ""; ?>>HP</option>
+            <option value="Acer" <?php echo $product['brand'] == "Acer" ? "selected" : ""; ?>>Acer</option>                   
+        </select><br>
+
+        
+        <label for="category">Categoría:</label>
+        <select type="text" name="category" required> 
+            <option value="">Seleccione una categoría</option>
+            <option value="Celulares" <?php echo $product['category'] == "Celulares" ? "selected" : ""; ?>>Celulares</option>
+            <option value="Tablets" <?php echo $product['category'] == "Tablets" ? "selected" : ""; ?>>Tablets</option>
+            <option value="Laptops" <?php echo $product['category'] == "Laptops" ? "selected" : ""; ?>>Laptops</option>
+            <option value="Smartwatches" <?php echo $product['category'] == "Smartwatches" ? "selected" : ""; ?>>Smartwatches</option>
+            <option value="Accesorios" <?php echo $product['category'] == "Accesorios" ? "selected" : ""; ?>>Accesorios</option>
+            <option value="Electrodomésticos" <?php echo $product['category'] == "Electrodomésticos" ? "selected" : ""; ?>>Electrodomésticos</option>
+            <option value="Audio" <?php echo $product['category'] == "Audio" ? "selected" : ""; ?>>Audio</option>
+            <option value="Monitores" <?php echo $product['category'] == "Monitores" ? "selected" : ""; ?>>Monitores</option>
+            <option value="Impresoras" <?php echo $product['category'] == "Impresoras" ? "selected" : ""; ?>>Impresoras</option>
+            <option value="Periféricos" <?php echo $product['category'] == "Periféricos" ? "selected" : ""; ?>>Periféricos</option>
+        </select><br><br>      
 
         <label for="description">Descripción:</label>
         <textarea name="description" required><?php echo htmlspecialchars($product['description']); ?></textarea><br><br>

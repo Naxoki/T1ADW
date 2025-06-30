@@ -32,10 +32,39 @@ $productController->add();
     <!-- Formulario para agregar producto -->
     <form method="POST" action="add.php">
         <label for="name">Nombre del Producto:</label>
-        <input type="text" name="name" required><br><br>
+        <input type="text" name="name" required><br><br>        
 
         <label for="description">Descripción:</label>
         <textarea name="description" required></textarea><br><br>
+
+        <label for="brand">Marca:</label>       
+        <select name="brand" required>
+            <option value="">Seleccione un tipo</option>
+            <option value="Samsung">Samsung</option>
+            <option value="Asus">Asus</option>     
+            <option value="Apple">Apple</option>
+            <option value="Xiaomi">Xiaomi</option>
+            <option value="Motorola">Motorola</option>
+            <option value="Huawei">Huawei</option>
+            <option value="LG">LG</option>
+            <option value="Sony">Sony</option>
+            <option value="Lenovo">Lenovo</option>
+            <option value="Dell">Dell</option>
+            <option value="HP">HP</option>
+            <option value="Acer">Acer</option>                   
+        </select>
+
+        <label for="category">Categoría:</label>
+        <select type="text" name="category" required>
+            <option value="">Seleccione una categoría</option>
+            <option value="Celulares">Celulares</option>
+            <option value="Tablets">Tablets</option>
+            <option value="Laptops">Laptops</option>
+            <option value="Smartwatches">Smartwatches</option>
+            <option value="Accesorios">Accesorios</option>
+            <option value="Electrodomésticos">Electrodomésticos</option>
+            <option value="Audio">Audio</option>
+        </select>
 
         <label for="price">Precio:</label>
         <input type="number" name="price" step="0.01" required><br><br>

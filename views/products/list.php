@@ -47,8 +47,10 @@ if (isset($_GET['delete'])) {
     <!-- Tabla para mostrar los productos -->
     <table border="1">
         <tr>
-            <th>Nombre</th>
+            <th>Nombre</th>            
             <th>Descripción</th>
+            <th>Marca</th>
+            <th>Categoria</th>            
             <th>Precio</th>
             <th>Stock</th>
             <th>Imagen</th>
@@ -62,6 +64,8 @@ if (isset($_GET['delete'])) {
             <tr>
                 <td><?php echo htmlspecialchars($product['name']); ?></td>
                 <td><?php echo htmlspecialchars($product['description']); ?></td>
+                <td><?php echo htmlspecialchars($product['brand']); ?></td>
+                <td><?php echo htmlspecialchars($product['category']); ?></td>
                 <td><?php echo number_format($product['price'], 2); ?> $</td>
                 <td><?php echo $product['stock']; ?></td>
                 <td><img src="<?php echo htmlspecialchars($product['image_url']); ?>" alt="Imagen de producto" width="100"></td>

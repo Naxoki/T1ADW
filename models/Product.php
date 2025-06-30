@@ -17,11 +17,13 @@ class Product {
     }
 
     // Agregar un nuevo producto
-    public function add($name, $description, $price, $stock, $image_url) {
-        $stmt = $this->pdo->prepare("INSERT INTO products (name, description, price, stock, image_url) VALUES (:name, :description, :price, :stock, :image_url)");
+    public function add($name, $description, $brand, $category, $price, $stock, $image_url) {
+        $stmt = $this->pdo->prepare("INSERT INTO products (name, description, brand, category, price, stock, image_url) VALUES (:name, :description, :brand, :category, :price, :stock, :image_url)");
         $stmt->execute([
             'name' => $name,
             'description' => $description,
+            'brand' => $brand,
+            'category' => $category,
             'price' => $price,
             'stock' => $stock,
             'image_url' => $image_url            
@@ -36,12 +38,14 @@ class Product {
     }
 
     // Función para actualizar un producto
-    public function update($id, $name, $description, $price, $stock, $image_url) {
-        $stmt = $this->pdo->prepare("UPDATE products SET name = :name, description = :description, price = :price, stock = :stock, image_url = :image_url WHERE id = :id");
+    public function update($id, $name, $description, $brand, $category, $price, $stock, $image_url) {
+        $stmt = $this->pdo->prepare("UPDATE products SET name = :name, description = :description, brand = :brand, category = :category, price = :price, stock = :stock, image_url = :image_url WHERE id = :id");
         $stmt->execute([
             'id' => $id,
             'name' => $name,
             'description' => $description,
+            'brand' => $brand,
+            'category' => $category,
             'price' => $price,
             'stock' => $stock,
             'image_url' => $image_url

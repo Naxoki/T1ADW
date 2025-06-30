@@ -28,12 +28,14 @@ class ProductController {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = $_POST['name'];
             $description = $_POST['description'];
+            $brand = $_POST['brand'];
+            $category = $_POST['category'];
             $price = $_POST['price'];
             $stock = $_POST['stock'];
             $image_url = $_POST['image_url'];
 
             try {
-                $this->productModel->add($name, $description, $price, $stock, $image_url);
+                $this->productModel->add($name, $description, $brand, $category, $price, $stock, $image_url);
                 header("Location: /TD1ADW/views/products/list.php");  // Redirigir a la lista de productos
                 exit;
             } catch (Exception $e) {
@@ -54,6 +56,8 @@ class ProductController {
 
             if ( empty($_POST['name']) || 
                 empty($_POST['description']) ||
+                empty($_POST['brand']) ||
+                empty($_POST['category']) ||
                 empty($_POST['price']) ||
                 empty($_POST['stock']) ||
                 empty($_POST['image_url']) ){
@@ -65,12 +69,14 @@ class ProductController {
             $id = $_GET['id'];
             $name = $_POST['name'];
             $description = $_POST['description'];
+            $brand = $_POST['brand'];
+            $category = $_POST['category'];
             $price = $_POST['price'];
             $stock = $_POST['stock'];
             $image_url = $_POST['image_url'];
 
             try {
-                $this->productModel->update($id, $name, $description, $price, $stock, $image_url);
+                $this->productModel->update($id, $name, $description,  $brand, $category, $price, $stock, $image_url);
                 //header("Location: /TD1ADW/views/products/list.php");  // Redirigir a la lista de productos
                 echo "<h4>Datos guardados correctamente!</h4>";  
                 echo '<a href="edit.php?id='.$_GET['id'].'">&laquo; Volver</a>';              
