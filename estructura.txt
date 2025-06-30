@@ -1,0 +1,33 @@
+/tecstore
+├── /config
+│   └── database.php       # Configuración de la base de datos
+├── /controllers
+│   ├── AuthController.php  # Manejo de login y autenticación
+│   ├── ProductController.php # Gestión de productos
+│   ├── CartController.php  # Gestión del carrito
+│   └── OrderController.php # Gestión de pedidos
+├── /models
+│   ├── User.php            # Modelo de usuario
+│   ├── Product.php         # Modelo de producto
+│   ├── CartItem.php        # Modelo de carrito
+│   └── Order.php           # Modelo de orden
+├── /views
+│   ├── /auth
+│   │   ├── login.php       # Vista de login
+│   ├── /products
+│   │   ├── index.php       # Vista para mostrar productos
+│   ├── /cart
+│   │   ├── index.php       # Vista para mostrar el carrito
+│   ├── /orders
+│   │   ├── index.php       # Vista para mostrar las órdenes
+├── /public
+│   ├── index.php           # Punto de entrada de la aplicación
+│   ├── /css
+│   ├── /js
+├── /utils
+│   └── functions.php       # Funciones útiles, como validación, etc.
+├── /assets
+│   ├── /images
+│   └── /fonts
+├── .env                    # Configuración de variables de entorno
+└── .htaccess               # Configuración de Apache (Redirección, etc.)
