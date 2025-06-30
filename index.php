@@ -14,15 +14,15 @@
   <nav>
     <ul>
       <li><a href="index.php">Inicio</a></li>
-      <li><a href="productos.html">Productos</a></li>
+      <li><a href="productos.php">Productos</a></li>
       <li><a href="#">Perfil</a></li>
     </ul>
   </nav>
   <div class="nav-right">
-    <form action="productos.html" method="get" >     
+    <form action="productos.php" method="get" >     
        <input type="text" placeholder="Que estás buscando?"/>
     </form>
-       <a href="login.php" class="user-icon" title="Iniciar sesión">👤 </a>
+       <a href="views/auth/login.php" class="user-icon" title="Iniciar sesión">👤 </a>
     <a href="carrito.php" class="cart-icon" title="Ver carrito">
       🛒
     </a>
@@ -33,7 +33,7 @@
   <section class="cyber-banner">
     <h1>🔥 ¡CyberDay TecStore!</h1>
     <p>Aprovecha descuentos increíbles en computación. Solo por tiempo limitado.</p>
-    <a href="productos.html" class="btn-banner">Ver productos</a>
+    <a href="productos.php" class="btn-banner">Ver productos</a>
   </section>
   <section class="accesos-rapidos">
   <h2>Accesos rápidos</h2>

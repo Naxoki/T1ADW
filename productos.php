@@ -20,7 +20,7 @@
     </nav>
     <div class="nav-right">
       <input type="text" placeholder="¿Qué estás buscando?" />
-      <a href="login.php" class="user-icon" title="Iniciar sesión">👤</a>
+      <a href="views/auth/login.php" class="user-icon" title="Iniciar sesión">👤</a>
       <a href="carrito.php" class="cart-icon" title="Carrito">🛒</a>
     </div>
   </header>
