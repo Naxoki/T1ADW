@@ -27,7 +27,7 @@ class AuthController {
         }
     }
 
- // Función para manejar el login de usuario
+    // Función para manejar el login de usuario
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $email = $_POST['email'];
@@ -43,8 +43,12 @@ class AuthController {
                 $_SESSION['user_name'] = $user['name'];
                 $_SESSION['role'] = $user['role']; // Asignar el rol a la sesión
 
-                // Redirigir al dashboard
-                header("Location: /TD1ADW/views/dashboard.php");
+                // Redirigir según el rol
+                if ($_SESSION['role'] === 'admin') {
+                    header("Location: /TD1ADW/views/dashboard.php");  // Redirigir al dashboard si es admin
+                } else if ($_SESSION['role'] === 'customer') {
+                    header("Location: /TD1ADW/views/products/products.php");  // Redirigir a productos si es customer
+                }
                 exit; // Asegurarse de detener la ejecución del script después de redirigir
             } catch (Exception $e) {
                 // Si hay un error, mostrarlo
@@ -53,5 +57,6 @@ class AuthController {
             }
         }
     }
+
 }
 ?>

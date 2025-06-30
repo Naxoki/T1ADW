@@ -3,11 +3,13 @@ require_once '../../models/Product.php';
 
 class ProductController {
     private $productModel;
+    private $pdo;
    
 
 
     public function __construct() { 
         global $pdo;    
+        $this->pdo = $pdo;
         $this->productModel = new Product($pdo);
     }
 
@@ -94,5 +96,35 @@ class ProductController {
             echo "Error: " . $e->getMessage();
         }
     }
+    // Agregar producto al carrito
+    public function addToCart($user_id, $product_id, $quantity) {
+        $stmt = $this->pdo->prepare("INSERT INTO cart (user_id, product_id, quantity) VALUES (:user_id, :product_id, :quantity)");
+        $stmt->execute([
+            'user_id' => $user_id,
+            'product_id' => $product_id,
+            'quantity' => $quantity
+        ]);
+    }
+
+    // Obtener los productos en el carrito de compras
+    public function getCart($user_id) {
+        $stmt = $this->pdo->prepare("SELECT products.*, cart.quantity FROM cart
+                                    INNER JOIN products ON cart.product_id = products.id
+                                    WHERE cart.user_id = :user_id");
+        $stmt->execute(['user_id' => $user_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Eliminar producto del carrito
+    public function removeFromCart($user_id, $product_id) {
+        $stmt = $this->pdo->prepare("DELETE FROM cart WHERE user_id = :user_id AND product_id = :product_id");
+        $stmt->execute(['user_id' => $user_id, 'product_id' => $product_id]);
+    }
+
+
+
+
+
+
 }
 ?>
