@@ -1,3 +1,27 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+session_start();
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['user_id'])) {
+    header("Location: /TD1ADW/views/auth/login.php");
+    exit;
+}
+
+// Incluir el controlador de productos y la base de datos
+require_once 'controllers/ProductController.php';
+require_once 'config/database.php';
+
+// Crear el controlador de productos
+$productController = new ProductController();
+
+// Obtener los productos del carrito
+$user_id = $_SESSION['user_id'];
+$cart = $productController->getCart($user_id);
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -29,6 +53,7 @@
   <main class="carrito-compra">
     <section class="detalle-carrito">
       <h2>Carrito de compra</h2>
+      <?php if (count($cart) > 0): ?>
       <table>
         <thead>
           <tr>
@@ -39,26 +64,25 @@
           </tr>
         </thead>
         <tbody>
+          <?php
+            $total = 0;
+            foreach ($cart as $item):
+                $subtotal = $item['price'] * $item['quantity'];
+                $total += $subtotal;
+          ?>
           <tr>
-            <td><img src="assets/img/laptop.jpg" alt="Laptop"><div><p>Laptop ASUS Zenbook</p><a href="#">Remover</a></div></td>
-            <td><button>-</button> 1 <button>+</button></td>
-            <td>$899.990</td>
-            <td>$899.990</td>
+            <td><img src="<?php echo $item['image_url']; ?>"><div><p><?php echo $item['name']; ?></p><a href="views/products/remove_from_cart.php?product_id=<?php echo $item['id']; ?>&front=true">Remover</a></div></td>
+   
+            <td><button>-</button><?php echo $item['quantity']; ?><button>+</button></td>
+            <td><?php echo $item['price']; ?></td>
+            <td><?php echo $subtotal; ?></td>
           </tr>
-          <tr>
-            <td><img src="assets/img/mouse.jpg" alt="Mouse"><div><p>Mouse Logitech G305</p><a href="#">Remover</a></div></td>
-            <td><button>-</button> 1 <button>+</button></td>
-            <td>$49.990</td>
-            <td>$49.980</td>
-          </tr>
-          <tr>
-            <td><img src="assets/img/audifonos.jpeg" alt="audifonos"><div><p>Mouse Logitech G305</p><a href="#">Remover</a></div></td>
-            <td><button>-</button> 1 <button>+</button></td>
-            <td>$89.990</td>
-            <td>$89.990</td>
-          </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
+      <?php else: ?>
+      <p>Tu carrito está vacío.</p>
+      <?php endif; ?>
     </section>
 
     <aside class="resumen">

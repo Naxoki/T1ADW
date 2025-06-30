@@ -69,7 +69,8 @@ $productController = new ProductController();
             <option value="Lenovo" <?php echo $product['brand'] == "Lenovo" ? "selected" : ""; ?>>Lenovo</option>
             <option value="Dell" <?php echo $product['brand'] == "Dell" ? "selected" : ""; ?>>Dell</option>
             <option value="HP" <?php echo $product['brand'] == "HP" ? "selected" : ""; ?>>HP</option>
-            <option value="Acer" <?php echo $product['brand'] == "Acer" ? "selected" : ""; ?>>Acer</option>                   
+            <option value="Acer" <?php echo $product['brand'] == "Acer" ? "selected" : ""; ?>>Acer</option>
+            <option value="Logitech" <?php echo $product['brand'] == "Logitech" ? "selected" : ""; ?> >Logitech</option>                 
         </select><br>
 
         

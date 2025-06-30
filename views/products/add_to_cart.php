@@ -24,8 +24,13 @@ if (isset($_GET['id'])) {
     $productController->addToCart($user_id, $product_id, $quantity);
     
     // Redirigir al carrito de compras
-    header("Location: /TD1ADW/views/products/cart.php");
+    if (isset($_GET['front']) && $_GET['front'] == 'true') {
+        header("Location: /TD1ADW/carrito.php");
+    } else {
+        header("Location: /TD1ADW/views/products/cart.php");
+    }
     exit;
+
 } else {
     // Si no se pasa un ID de producto, redirigir al listado de productos
     header("Location: /TD1ADW/views/products/products.php");

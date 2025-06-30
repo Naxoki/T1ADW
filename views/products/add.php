@@ -51,8 +51,9 @@ $productController->add();
             <option value="Lenovo">Lenovo</option>
             <option value="Dell">Dell</option>
             <option value="HP">HP</option>
-            <option value="Acer">Acer</option>                   
-        </select>
+            <option value="Acer">Acer</option>  
+            <option value="Logitech">Logitech</option>                 
+        </select><br><br>
 
         <label for="category">Categoría:</label>
         <select type="text" name="category" required>
@@ -64,7 +65,10 @@ $productController->add();
             <option value="Accesorios">Accesorios</option>
             <option value="Electrodomésticos">Electrodomésticos</option>
             <option value="Audio">Audio</option>
-        </select>
+            <option value="Monitores">Monitores</option>
+            <option value="Impresoras">Impresoras</option>
+            <option value="Periféricos">Periféricos</option>
+        </select><br><br>
 
         <label for="price">Precio:</label>
         <input type="number" name="price" step="0.01" required><br><br>

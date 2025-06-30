@@ -24,6 +24,12 @@ if (isset($_GET['product_id'])) {
 }
 
 // Redirigir al carrito después de eliminar el producto
-header("Location: /TD1ADW/views/products/cart.php");
+if (isset($_GET['front']) && $_GET['front'] == 'true') {
+    header("Location: /TD1ADW/carrito.php");
+} else {
+    header("Location: /TD1ADW/views/products/cart.php");
+}
 exit;
+
+
 ?>

@@ -1,5 +1,5 @@
 <?php
-require_once '../../models/Product.php';
+require_once __DIR__ . '/../models/Product.php';
 
 class ProductController {
     private $productModel;
@@ -79,7 +79,7 @@ class ProductController {
                 $this->productModel->update($id, $name, $description,  $brand, $category, $price, $stock, $image_url);
                 //header("Location: /TD1ADW/views/products/list.php");  // Redirigir a la lista de productos
                 echo "<h4>Datos guardados correctamente!</h4>";  
-                echo '<a href="edit.php?id='.$_GET['id'].'">&laquo; Volver</a>';              
+                echo '<a href="list.php">&laquo; Volver a la lista</a>';             
             } catch (Exception $e) {
                 echo "Error: " . $e->getMessage();
             }

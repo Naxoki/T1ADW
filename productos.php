@@ -1,3 +1,20 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+session_start();
+
+// Incluir el controlador de productos
+require_once 'controllers/AuthController.php';
+require_once 'controllers/ProductController.php';
+require_once 'config/database.php';
+
+$productController = new ProductController();
+$products = $productController->list(); // Obtener la lista de productos
+
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,14 +30,21 @@
     <nav>
       <ul>
         <li><a href="index.php">Inicio</a></li>
-        <li><a href="productos.html">Productos</a></li>
-        <li><a href="carrito.php">Carrito</a></li>
+        <li><a href="productos.php">Productos</a></li>
+        <li><a href="views/products/cart.php">Carrito</a></li>
         <li><a href="#">Perfil</a></li>
       </ul>
     </nav>
     <div class="nav-right">
       <input type="text" placeholder="¿Qué estás buscando?" />
-      <a href="views/auth/login.php" class="user-icon" title="Iniciar sesión">👤</a>
+        <?php if (isset($_SESSION['user_id'])): ?>
+          <!-- Si el usuario está logueado -->
+          <span>Bienvenido, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</span>
+          <a href="views/auth/logout.php" class="user-icon" title="Cerrar sesión">👤</a>
+          <?php else: ?>
+          <!-- Si el usuario no está logueado -->
+          <a href="views/auth/login.php" class="user-icon" title="Iniciar sesión">👤</a>
+        <?php endif; ?>
       <a href="carrito.php" class="cart-icon" title="Carrito">🛒</a>
     </div>
   </header>
@@ -70,65 +94,34 @@
     </aside>
 
     <section class="resultados">
-  <h2>Resultados</h2>
-  <div class="grid">
-    <div class="producto">
-      <img src="assets/img/laptop.jpg" alt="Laptop ASUS">
-      <h3>Laptop ASUS Zenbook</h3>
-      <p>$899.990</p>
-      <button>Agregar al carrito</button>
-    </div>
+      <h2>Resultados</h2>
+      <!-- Enlace para agregar un nuevo producto (solo visible para administradores) -->
+        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+            <a href="add.php">Agregar Nuevo Producto</a><br><br>
+        <?php endif; ?>
 
-    <div class="producto">
-      <img src="assets/img/monitor.jpg" alt="Monitor LG">
-      <h3>Monitor LG 27”</h3>
-      <p>$279.990</p>
-      <button>Agregar al carrito</button>
-    </div>
-
-    <div class="producto">
-      <img src="assets/img/teclado.jpg" alt="Teclado Razer">
-      <h3>Teclado Mecánico Razer</h3>
-      <p>$89.990</p>
-      <button>Agregar al carrito</button>
-    </div>
-
-    <div class="producto">
-      <img src="assets/img/mouse.jpg" alt="Mouse Logitech">
-      <h3>Mouse Logitech G305</h3>
-      <p>$49.990</p>
-      <button>Agregar al carrito</button>
-    </div>
-
-    <div class="producto">
-      <img src="assets/img/audifonos.jpeg" alt="Audífonos JBL">
-      <h3>Audífonos JBL Tune</h3>
-      <p>$89.990</p>
-      <button>Agregar al carrito</button>
-    </div>
-
-    <div class="producto">
-      <img src="assets/img/Tablet Samsung Galaxy Tab.jpg" alt="Tablet Samsung">
-      <h3>Samsung Galaxy Tab S10 U</h3>
-      <p>$199.990</p>
-      <button>Agregar al carrito</button>
-    </div>
-
-    <div class="producto">
-      <img src="assets/img/IMPRESORA HP.jpeg" alt="Impresora HP">
-      <h3>Impresora HP DeskJet</h3>
-      <p>$59.990</p>
-      <button>Agregar al carrito</button>
-    </div>
-
-    <div class="producto">
-      <img src="assets/img/CAMARA LOGITECH.jpg" alt="Webcam Logitech">
-      <h3>Webcam Logitech HD</h3>
-      <p>$39.990</p>
-      <button>Agregar al carrito</button>
-    </div>
-  </div>
-</section>
+        
+        <!-- Tabla para mostrar los productos -->
+        <div class="grid">
+          <?php
+          // Verificar si hay productos y listarlos
+          if (isset($products) && count($products) > 0):
+             foreach ($products as $product):
+          ?>
+          <div class="producto">
+            <img src="<?php echo $product['image_url']; ?>">
+            <h3><?php echo $product['name']; ?></h3>
+            <p><?php echo $product['price']; ?></p>
+            <a href="views/products/add_to_cart.php?id=<?php echo $product['id']; ?>&front=true">Agregar al Carrito</a>
+          </div>
+          <?php
+              endforeach;
+          else:
+          ?>         
+            <h4>No hay productos disponibles.</h4>            
+          <?php endif; ?>
+      </div>
+    </section>
   </main>
 </body>
 </html>

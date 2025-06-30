@@ -1,7 +1,9 @@
 <?php
+$baseurl = "//".$_SERVER['SERVER_NAME']."/".explode('/',dirname($_SERVER['REQUEST_URI']))[1]; //localhost 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 
 // Iniciar sesión para asegurarnos de que el administrador esté autenticado
 session_start();
@@ -44,6 +46,8 @@ if (isset($_GET['delete'])) {
     <!-- Enlace para agregar un nuevo producto -->
     <a href="add.php">Agregar Nuevo Producto</a><br><br>
 
+    
+
     <!-- Tabla para mostrar los productos -->
     <table border="1">
         <tr>
@@ -68,7 +72,7 @@ if (isset($_GET['delete'])) {
                 <td><?php echo htmlspecialchars($product['category']); ?></td>
                 <td><?php echo number_format($product['price'], 2); ?> $</td>
                 <td><?php echo $product['stock']; ?></td>
-                <td><img src="<?php echo htmlspecialchars($product['image_url']); ?>" alt="Imagen de producto" width="100"></td>
+                <td><img src="<?php echo $baseurl."/".$product['image_url']; ?>" alt="Imagen de producto" width="100"></td>
                 <td>
                     <a href="edit.php?id=<?php echo $product['id']; ?>">Editar</a> |
                     <a href="list.php?delete=<?php echo $product['id']; ?>">Eliminar</a>

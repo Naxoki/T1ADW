@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../models/User.php';
+require_once __DIR__ .'/../models/User.php';
 
 class AuthController {
     private $userModel;
@@ -47,7 +47,7 @@ class AuthController {
                 if ($_SESSION['role'] === 'admin') {
                     header("Location: /TD1ADW/views/dashboard.php");  // Redirigir al dashboard si es admin
                 } else if ($_SESSION['role'] === 'customer') {
-                    header("Location: /TD1ADW/views/products/products.php");  // Redirigir a productos si es customer
+                    header("Location: /TD1ADW/productos.php");  // Redirigir a productos si es customer
                 }
                 exit; // Asegurarse de detener la ejecución del script después de redirigir
             } catch (Exception $e) {
