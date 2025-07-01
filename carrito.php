@@ -21,6 +21,20 @@ $productController = new ProductController();
 // Obtener los productos del carrito
 $user_id = $_SESSION['user_id'];
 $cart = $productController->getCart($user_id);
+
+// Calcular total
+$total = 0;
+foreach ($cart as $item) {
+    $subtotal = $item['price'] * $item['quantity'];
+    $total += $subtotal;
+}
+
+// Nuevo: preparar la cadena para mostrar
+if ($total > 0) {
+    $displayTotal = '$' . number_format($total, 0, ',', '.');
+} else {
+    $displayTotal = '0';
+}
 ?>
 
 <!DOCTYPE html>
@@ -93,16 +107,19 @@ $cart = $productController->getCart($user_id);
     </section>
 
     <aside class="resumen">
-      <h3>Resumen de compra</h3>
-      <form>
-        <label><input type="radio" name="envio" checked> Retiro en tienda — $0</label><br>
-        <label><input type="radio" name="envio"> Retiro Chilexpress — $2.500</label><br>
-        <label><input type="radio" name="envio"> Envío a domicilio — $3.500</label><br>
-      </form>
-      <p>Subtotal: <strong>$1.039.970</strong></p>
-      <p>Total: <strong>$1.039.970</strong></p>
-      <button class="pagar">Pagar</button>
-    </aside>
+        <h3>Resumen de compra</h3>
+        <!--<form> revisar  los costes de envío
+          <label><input type="radio" name="envio" checked> Retiro en tienda — $0</label><br>
+          <label><input type="radio" name="envio"> Retiro Chilexpress — $2.500</label><br>
+          <label><input type="radio" name="envio"> Envío a domicilio — $3.500</label><br>
+        </form>-->
+
+        <!-- Mostrar subtotal y total formateados -->
+        <p>Subtotal: <strong><?= $displayTotal ?></strong></p>
+        <p>Total:   <strong><?= $displayTotal ?></strong></p>
+
+        <button class="pagar">Pagar</button>
+      </aside>
   </main>
 </body>
 </html>
