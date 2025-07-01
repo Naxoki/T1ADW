@@ -12,8 +12,7 @@
   <header class="navbar">
   <div class="logo">TecStore</div>
   <nav>
-    <ul>
-      <li><a href="index.php">Inicio</a></li>
+    <ul>      
       <li><a href="productos.php">Productos</a></li>
       <li><a href="#">Perfil</a></li>
     </ul>

@@ -10,14 +10,26 @@ require_once 'controllers/AuthController.php';
 require_once 'controllers/ProductController.php';
 require_once 'config/database.php';
 
-$productController = new ProductController();
-$products = $productController->list(); // Obtener la lista de productos
+  // Instanciar el controlador y obtener datos
+  $productController = new ProductController();
+  $allProducts      = $productController->list();
+  $arraycategorias  = $productController->categories;
+  $arraymarcas      = $productController->brands;
 
+  // Leer filtros desde la URL
+  $cats = $_GET['categoria'] ?? [];
+  $brs  = $_GET['marca']    ?? [];
+  $maxP = isset($_GET['max_price']) ? (int) $_GET['max_price'] : null;
 
-$arraycategorias = $productController->categories;
+  // Aplicar filtrado: OR dentro de cada dimensión, AND entre dimensiones
+  $typo_avoider = function($p) use ($cats, $brs, $maxP) {
+      $matchCat   = empty($cats)           || in_array($p['category'], $cats);
+      $matchBrand = empty($brs)            || in_array($p['brand'],    $brs);
+      $matchPrice = is_null($maxP)         || ((int) $p['price'] <= $maxP);
+      return $matchCat && $matchBrand && $matchPrice;
+  };
 
-$arraymarcas = $productController->brands;
-
+$products = array_filter($allProducts, $typo_avoider);
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +47,6 @@ $arraymarcas = $productController->brands;
     <nav>
       <ul>
         <li><a href="index.php">Inicio</a></li>
-        <li><a href="views/proproductos.php">Productos</a></li>
         <li><a href="carrito.php">Carrito</a></li>
         <li><a href="#">Perfil</a></li>
       </ul>
@@ -65,28 +76,60 @@ $arraymarcas = $productController->brands;
   </section>
 
   <main class="filtros-productos">
-    <form class="filtros">
+    <form class="filtros" method="GET" action="">
       <h2>Filtrar por</h2>
       <div>
         <h3>Categorías</h3>
         <?php foreach ($arraycategorias as $categoria): ?>
-          <label><input type="checkbox" name="categoria" value="<?php echo $categoria; ?>"> <?php echo $categoria; ?></label><br>
+          <label>
+            <input
+              type="checkbox"
+              name="categoria[]"
+              value="<?= htmlspecialchars($categoria) ?>"
+              <?= (!empty($_GET['categoria']) && in_array($categoria, $_GET['categoria'])) ? 'checked' : '' ?>
+            >
+            <?= $categoria ?>
+          </label><br>
         <?php endforeach; ?>
       </div>
-      <div>
-        <h3>Precio</h3>
-        <input type="range" min="10000" max="2500000" value="500000" step="10000">
-        <p>Precio: $10.000 - $2.500.000</p>
-      </div>
-      <div>
-        <h3>Marcas</h3>    
-        <?php foreach ($arraymarcas as $marca): ?>
-          <label><input type="checkbox" name="marca" value="<?php echo $marca; ?>"> <?php echo $marca; ?></label><br>    
-         <?php endforeach; ?>
 
+      <div>
+        <h3>Precio Máximo</h3>
+        <?php 
+          $maxPrice = isset($_GET['max_price']) ? (int)$_GET['max_price'] : 2500000;
+        ?>
+        <input
+          type="range"
+          name="max_price"
+          min="10000"
+          max="2500000"
+          step="10000"
+          value="<?= $maxPrice ?>"
+          oninput="this.nextElementSibling.innerText = this.value"
+        >
+        <span><?= number_format($maxPrice, 0, ',', '.') ?></span>
       </div>
-        <button>Aplicar filtro</button>
+
+      <div>
+        <h3>Marcas</h3>
+        <?php foreach ($arraymarcas as $marca): ?>
+          <label>
+            <input
+              type="checkbox"
+              name="marca[]"
+              value="<?= htmlspecialchars($marca) ?>"
+              <?= (!empty($_GET['marca']) && in_array($marca, $_GET['marca'])) ? 'checked' : '' ?>
+            >
+            <?= $marca ?>
+          </label><br>
+        <?php endforeach; ?>
+      </div>
+      <div class="botones-filtro">
+        <button type="submit">Aplicar filtro</button>
+        <button type="button" onclick="window.location='productos.php'">Quitar filtros</button>
+      </div>
     </form>
+
 
     <section class="resultados">
       <h2>Resultados</h2>

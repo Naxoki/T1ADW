@@ -38,14 +38,21 @@ $cart = $productController->getCart($user_id);
   <nav>
     <ul>
       <li><a href="index.php">Inicio</a></li>
-      <li><a href="productos.html">Productos</a></li>
+      <li><a href="productos.php">Productos</a></li>
       <li><a href="carrito.php">Carrito</a></li>
       <li><a href="#">Perfil</a></li>
     </ul>
   </nav>
   <div class="nav-right">
     <input type="text" placeholder="¿Qué estás buscando?" />
-    <a href="login.php" class="user-icon" title="Iniciar sesión">👤</a>
+    <?php if (isset($_SESSION['user_id'])): ?>
+          <!-- Si el usuario está logueado -->
+          <span>Bienvenido, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</span>
+          <a href="views/auth/logout.php" class="user-icon" title="Cerrar sesión">👤</a>
+          <?php else: ?>
+          <!-- Si el usuario no está logueado -->
+          <a href="views/auth/login.php" class="user-icon" title="Iniciar sesión">👤</a>
+        <?php endif; ?>
     <a href="carrito.php" class="cart-icon" title="Carrito">🛒</a>
   </div>
 </header>
