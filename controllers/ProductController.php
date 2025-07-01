@@ -4,6 +4,8 @@ require_once __DIR__ . '/../models/Product.php';
 class ProductController {
     private $productModel;
     private $pdo;
+    public $categories;
+    public $brands;
    
 
 
@@ -11,6 +13,35 @@ class ProductController {
         global $pdo;    
         $this->pdo = $pdo;
         $this->productModel = new Product($pdo);
+
+        $this->categories = [
+            "Celulares",
+            "Tablets",
+            "Laptops",
+            "Smartwatches",
+            "Accesorios",
+            "Electrodomésticos",
+            "Audio",
+            "Monitores",
+            "Impresoras",
+            "Periféricos",
+        ];
+
+        $this->brands = [
+            'Samsung',
+            'Asus',
+            'Apple',
+            'Xiaomi',
+            'Motorola',
+            'Huawei',
+            'LG',
+            'Sony',
+            'Lenovo',
+            'Dell',
+            'HP',
+            'Acer',
+            'Logitech'
+        ];
     }
 
     // Función para listar todos los productos

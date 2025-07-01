@@ -114,6 +114,9 @@ body {
 }
 
 .producto button, .producto a {
+
+  display: inline-block;
+  margin-top: 5px;
   background-color: #a259ff;
   color: white;
   border: none;
@@ -124,6 +127,22 @@ body {
 }
 
 .producto button:hover, .producto a:hover {
+
+  background-color: #8d3fff;
+}
+.filtros button, .filtros a {
+
+  margin-top: 15px;
+  background-color: #a259ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.filtros button:hover, .filtros a:hover {
   background-color: #8d3fff;
 }
 

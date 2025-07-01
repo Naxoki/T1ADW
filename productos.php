@@ -14,7 +14,12 @@ $productController = new ProductController();
 $products = $productController->list(); // Obtener la lista de productos
 
 
+$arraycategorias = $productController->categories;
+
+$arraymarcas = $productController->brands;
+
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,8 +35,8 @@ $products = $productController->list(); // Obtener la lista de productos
     <nav>
       <ul>
         <li><a href="index.php">Inicio</a></li>
-        <li><a href="productos.php">Productos</a></li>
-        <li><a href="views/products/cart.php">Carrito</a></li>
+        <li><a href="views/proproductos.php">Productos</a></li>
+        <li><a href="carrito.php">Carrito</a></li>
         <li><a href="#">Perfil</a></li>
       </ul>
     </nav>
@@ -60,15 +65,13 @@ $products = $productController->list(); // Obtener la lista de productos
   </section>
 
   <main class="filtros-productos">
-    <aside class="filtros">
+    <form class="filtros">
       <h2>Filtrar por</h2>
       <div>
         <h3>Categorías</h3>
-        <label><input type="checkbox" checked> Laptops</label><br>
-        <label><input type="checkbox"> Monitores</label><br>
-        <label><input type="checkbox"> Teclados</label><br>
-        <label><input type="checkbox"> Mouses</label><br>
-        <label><input type="checkbox"> Accesorios</label>
+        <?php foreach ($arraycategorias as $categoria): ?>
+          <label><input type="checkbox" name="categoria" value="<?php echo $categoria; ?>"> <?php echo $categoria; ?></label><br>
+        <?php endforeach; ?>
       </div>
       <div>
         <h3>Precio</h3>
@@ -76,22 +79,14 @@ $products = $productController->list(); // Obtener la lista de productos
         <p>Precio: $10.000 - $2.500.000</p>
       </div>
       <div>
-        <h3>Marcas</h3>
-        <label><input type="checkbox"> ASUS</label><br>
-        <label><input type="checkbox"> HP</label><br>
-        <label><input type="checkbox"> Logitech</label><br>
-        <label><input type="checkbox"> Razer</label><br>
-        <label><input type="checkbox"> Dell</label>
+        <h3>Marcas</h3>    
+        <?php foreach ($arraymarcas as $marca): ?>
+          <label><input type="checkbox" name="marca" value="<?php echo $marca; ?>"> <?php echo $marca; ?></label><br>    
+         <?php endforeach; ?>
+
       </div>
-      <div>
-        <h3>Procesador</h3>
-        <label><input type="checkbox"> Intel Corei5</label><br>
-        <label><input type="checkbox"> Intel Corei7</label><br>
-        <label><input type="checkbox"> Intel Corei9</label><br>
-        <label><input type="checkbox"> AMD Ryzen5</label><br>
-        <label><input type="checkbox"> AMD Ryzen7</label>
-      </div>
-    </aside>
+        <button>Aplicar filtro</button>
+    </form>
 
     <section class="resultados">
       <h2>Resultados</h2>

@@ -17,6 +17,10 @@ $productController = new ProductController();
 
 // Llamar a la función de agregar producto
 $productController->add();
+
+$arraycategorias = $productController->categories;
+
+$arraymarcas = $productController->brands;
 ?>
 
 <!DOCTYPE html>
